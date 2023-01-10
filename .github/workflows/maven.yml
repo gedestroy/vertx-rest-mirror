@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   push:
   pull_request:
-    branches: [ "master", "develop" ]
+    branches: [ "fork_master", "fork_develop" ]
 
 jobs:
   build_maven:
@@ -30,7 +30,7 @@ jobs:
         run: mvn install -Dmaven.javadoc.skip=true -B -V
 
       - name: Release to maven central
-        if: github.ref_name == 'master' && github.event_name != 'pull_request' && github.repository == 'swisspost/vertx-rest-mirror'
+        if: github.ref_name == 'fork_master' && github.event_name != 'pull_request' && github.repository == 'gedestroy/vertx-rest-mirror'
         run: |
           curl -s get.sdkman.io | bash
           source "$HOME/.sdkman/bin/sdkman-init.sh"
